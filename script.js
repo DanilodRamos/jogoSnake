@@ -3,7 +3,7 @@ const ctx = canvas.getContext("2d");
 const gridSize = 20;
 const canvasSize = 400;
 let score = 0;
-let speed = 100; // Velocidade inicial
+let speed = 80; // Velocidade inicial
 let gameInterval;
 
 let snake = [{ x: 160, y: 160 }];
