@@ -7,12 +7,27 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="game-container">
+    <!-- Tela de Início -->
+    <div id="startScreen">
+        <h1>Jogo da Cobrinha</h1>
+        <button id="startButton">Iniciar Jogo</button>
+    </div>
+    
+    <!-- Tela do Jogo -->
+    <div class="game-container" style="display:none;">
         <canvas id="gameCanvas" width="400" height="400"></canvas>
         <div class="score">
             <p>Pontuação: <span id="score">0</span></p>
         </div>
     </div>
+
+    <!-- Tela de Game Over -->
+    <div id="gameOverScreen" style="display: none;">
+        <h1>Game Over!</h1>
+        <p>Você fez <span id="finalScore"></span> pontos.</p>
+        <button id="restartButton">Reiniciar</button>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>

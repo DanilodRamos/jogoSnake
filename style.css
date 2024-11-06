@@ -1,3 +1,4 @@
+/* Reset de estilo */
 * {
     margin: 0;
     padding: 0;
@@ -26,11 +27,50 @@ canvas {
     margin-top: 20px;
     font-size: 18px;
 }
+
+/* Tela de Início */
+#startScreen {
+    text-align: center;
+}
+
+#startButton {
+    font-size: 18px;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #28a745;
+    border: none;
+    color: white;
+    border-radius: 5px;
+}
+
+#startButton:hover {
+    background-color: #218838;
+}
+
+/* Tela de Game Over */
+#gameOverScreen {
+    text-align: center;
+}
+
+#restartButton {
+    font-size: 18px;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #dc3545;
+    border: none;
+    color: white;
+    border-radius: 5px;
+}
+
+#restartButton:hover {
+    background-color: #c82333;
+}
+
+/* Animação da comida */
 @keyframes foodAnimation {
-    0% { transform:scale(1);}
-    50% { transform:scale(1.2);}
-    100% { transform: scale(1);}
-    
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
 }
 
 .food {

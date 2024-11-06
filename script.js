@@ -3,24 +3,41 @@ const ctx = canvas.getContext("2d");
 const gridSize = 20;
 const canvasSize = 400;
 let score = 0;
+let speed = 100; // Velocidade inicial
+let gameInterval;
 
 let snake = [{ x: 160, y: 160 }];
 let direction = 'RIGHT';
 let food = spawnFood();
-let gameInterval;
 
+document.getElementById('startButton').addEventListener('click', startGame);
+document.getElementById('restartButton').addEventListener('click', restartGame);
 document.addEventListener('keydown', changeDirection);
+
+function startGame() {
+    document.getElementById('startScreen').style.display = 'none';
+    document.getElementById('gameOverScreen').style.display = 'none';
+    document.querySelector('.game-container').style.display = 'block';
+    gameInterval = setInterval(gameLoop, speed);
+}
 
 function gameLoop() {
     updateSnakePosition();
     if (checkCollision()) {
-        clearInterval(gameInterval);
-        alert("Game Over! Sua pontuação foi: " + score);
+        endGame();
         return;
     }
     if (eatFood()) {
         score += 10;
         document.getElementById("score").textContent = score;
+        
+        // Aumenta a velocidade a cada 50 pontos
+        if (score % 50 === 0 && speed > 50) {
+            speed -= 10;
+            clearInterval(gameInterval);
+            gameInterval = setInterval(gameLoop, speed);
+        }
+        
         food = spawnFood();
     }
     drawGame();
@@ -76,7 +93,7 @@ function drawGame() {
         ctx.fillRect(segment.x, segment.y, gridSize, gridSize);
     });
     
-    // Desenha a comida
+    // Desenha a comida com animação
     ctx.fillStyle = 'red';
     ctx.fillRect(food.x, food.y, gridSize, gridSize);
 }
@@ -96,5 +113,21 @@ function changeDirection(event) {
     }
 }
 
-// Inicia o jogo
-gameInterval = setInterval(gameLoop, 100);
+function endGame() {
+    clearInterval(gameInterval);
+    document.getElementById('finalScore').textContent = score;
+    document.getElementById('gameOverScreen').style.display = 'block';
+    document.querySelector('.game-container').style.display = 'none';
+}
+
+function restartGame() {
+    score = 0;
+    speed = 100;
+    snake = [{ x: 160, y: 160 }];
+    direction = 'RIGHT';
+    food = spawnFood();
+    document.getElementById("score").textContent = score;
+    document.getElementById('gameOverScreen').style.display = 'none';
+    document.querySelector('.game-container').style.display = 'block';
+    gameInterval = setInterval(gameLoop, speed);
+}
